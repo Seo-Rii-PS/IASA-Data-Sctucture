@@ -25,12 +25,12 @@ void enQueue(queue *qu, data val) {
     qu->arr[qu->rear] = val;
 }
 
-data frontQueue(queue qu) {
-    return qu.arr[qu.front];
+data frontQueue(queue *qu) {
+    return qu->arr[qu->front];
 }
 
 data deQueue(queue *qu) {
-    data rValue = frontQueue(*qu);
+    data rValue = frontQueue(qu);
     ++qu->front;
     return rValue;
 }
@@ -38,9 +38,9 @@ data deQueue(queue *qu) {
 int main() {
     queue *qu = newQueue();
     enQueue(qu, 1);
-    printf("%d\n", frontQueue(*qu));
+    printf("%d\n", frontQueue(qu));
     enQueue(qu, 2);
-    printf("%d\n", frontQueue(*qu));
+    printf("%d\n", frontQueue(qu));
     deQueue(qu);
-    printf("%d\n", frontQueue(*qu));
+    printf("%d\n", frontQueue(qu));
 }
