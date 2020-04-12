@@ -29,63 +29,63 @@ deque new_deque() {
     return tQ;
 }
 
-void add_front(deque *qu, data val) {
+void add_front(deque *dq, data val) {
     node *tNode = newNode(val, NULL, NULL);
-    if (qu->front) qu->front->prevNode = tNode;
-    tNode->nextNode = qu->front;
-    qu->front = tNode;
-    if (!qu->rear) qu->rear = tNode;
+    if (dq->front) dq->front->prevNode = tNode;
+    tNode->nextNode = dq->front;
+    dq->front = tNode;
+    if (!dq->rear) dq->rear = tNode;
 }
 
-void add_rear(deque *qu, data val) {
+void add_rear(deque *dq, data val) {
     node *tNode = newNode(val, NULL, NULL);
-    if (qu->rear) qu->rear->nextNode = tNode;
-    tNode->prevNode = qu->rear;
-    qu->rear = tNode;
-    if (!qu->front) qu->front = tNode;
+    if (dq->rear) dq->rear->nextNode = tNode;
+    tNode->prevNode = dq->rear;
+    dq->rear = tNode;
+    if (!dq->front) dq->front = tNode;
 }
 
-data get_front(deque qu) {
-    return qu.front->val;
+data get_front(deque dq) {
+    return dq.front->val;
 }
 
-data get_rear(deque qu) {
-    return qu.rear->val;
+data get_rear(deque dq) {
+    return dq.rear->val;
 }
 
-data delete_front(deque *qu) {
-    data rValue = get_front(*qu);
-    node *delNode = qu->front;
-    qu->front = qu->front->nextNode;
-    if (qu->front) qu->front->prevNode = NULL;
-    else qu->rear = NULL;
+data delete_front(deque *dq) {
+    data rValue = get_front(*dq);
+    node *delNode = dq->front;
+    dq->front = dq->front->nextNode;
+    if (dq->front) dq->front->prevNode = NULL;
+    else dq->rear = NULL;
     free(delNode);
     return rValue;
 }
 
-data delete_rear(deque *qu) {
-    data rValue = get_rear(*qu);
-    node *delNode = qu->rear;
-    qu->rear = qu->rear->prevNode;
-    if (qu->rear) qu->rear->nextNode = NULL;
-    else qu->front = NULL;
+data delete_rear(deque *dq) {
+    data rValue = get_rear(*dq);
+    node *delNode = dq->rear;
+    dq->rear = dq->rear->prevNode;
+    if (dq->rear) dq->rear->nextNode = NULL;
+    else dq->front = NULL;
     free(delNode);
     return rValue;
 }
 
 int main() {
-    deque qu = new_deque();
-    add_front(&qu, 1);
-    printf("%d %d\n", get_front(qu), get_rear(qu));
-    add_front(&qu, 2);
-    printf("%d %d\n", get_front(qu), get_rear(qu));
-    add_rear(&qu, 3);
-    printf("%d %d\n", get_front(qu), get_rear(qu));
-    delete_front(&qu);
-    printf("%d %d\n", get_front(qu), get_rear(qu));
-    delete_front(&qu);
-    printf("%d %d\n", get_front(qu), get_rear(qu));
-    delete_front(&qu);
-    add_front(&qu, 1);
-    printf("%d %d\n", get_front(qu), get_rear(qu));
+    deque dq = new_deque();
+    add_front(&dq, 1);
+    printf("%d %d\n", get_front(dq), get_rear(dq));
+    add_front(&dq, 2);
+    printf("%d %d\n", get_front(dq), get_rear(dq));
+    add_rear(&dq, 3);
+    printf("%d %d\n", get_front(dq), get_rear(dq));
+    delete_front(&dq);
+    printf("%d %d\n", get_front(dq), get_rear(dq));
+    delete_front(&dq);
+    printf("%d %d\n", get_front(dq), get_rear(dq));
+    delete_front(&dq);
+    add_front(&dq, 1);
+    printf("%d %d\n", get_front(dq), get_rear(dq));
 }
