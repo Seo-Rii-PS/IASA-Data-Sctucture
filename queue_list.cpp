@@ -4,6 +4,7 @@
 
 #include<stdio.h>
 #include<stdlib.h>
+#include <assert.h>
 
 typedef int data;
 
@@ -23,9 +24,14 @@ struct queue {
     node *front, *rear;
 };
 
-queue newQueue() {
+queue init() {
     queue tQ = {NULL, NULL};
     return tQ;
+}
+
+int isEmpty(queue *qu) {
+    if (qu->front == NULL) return 1;
+    else return 0;
 }
 
 void enQueue(queue *qu, data val) {
@@ -35,24 +41,39 @@ void enQueue(queue *qu, data val) {
     if (!qu->front) qu->front = tNode;
 }
 
-data frontQueue(queue qu) {
+data peek(queue qu) {
+    assert(isEmpty(&qu) == 0);
     return qu.front->val;
 }
 
 data deQueue(queue *qu) {
-    data rValue = frontQueue(*qu);
+    assert(isEmpty(qu) == 0);
+    data rValue = peek(*qu);
     node *delNode = qu->front;
     qu->front = qu->front->nextNode;
     free(delNode);
     return rValue;
 }
 
+void dfsPrintQueue(node *no) {
+    if (no == NULL) return;
+    printf("%d ", no->val);
+    dfsPrintQueue(no->nextNode);
+}
+
+void printQueue(queue *qu) {
+    printf("[ ");
+    dfsPrintQueue(qu->front);
+    printf("]\n");
+}
+
 int main() {
-    queue qu = newQueue();
+    queue qu = init();
     enQueue(&qu, 1);
-    printf("%d\n", frontQueue(qu));
     enQueue(&qu, 2);
-    printf("%d\n", frontQueue(qu));
-    deQueue(&qu);
-    printf("%d\n", frontQueue(qu));
+    printQueue(&qu);
+    printf("%d\n", deQueue(&qu));
+    printf("%d\n", peek(qu));
+    printf("%d\n", deQueue(&qu));
+    printf("%d\n", deQueue(&qu));
 }

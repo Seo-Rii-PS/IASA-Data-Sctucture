@@ -3,4 +3,4 @@ project(iasa)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(iasa stack_list.cpp)
+add_executable(iasa queue_array_circular.cpp)
