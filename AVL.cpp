@@ -112,22 +112,17 @@ void inorder(bst *tree) {
     inorder(&((*tree)->r));
 }
 
-int findTreeR(bst *tree, element el) {
-    if (!(*tree)) return 0;
-    if ((*tree)->val == el) return 1;
-    if ((*tree)->val > el) {
-        int r = findTreeR(&((*tree)->l), el);
-        return r ? r + 1 : 0;
-    } else {
-        int r = findTreeR(&((*tree)->r), el);
-        return r ? r + 1 : 0;
-    }
+int findTreeR(bst *tree, element el, int h) {
+    if (!(*tree)) return -h;
+    if ((*tree)->val == el) return h;
+    if ((*tree)->val > el) return findTreeR(&((*tree)->l), el, h + 1);
+    return findTreeR(&((*tree)->r), el, h + 1);
 }
 
 void findTree(bst *tree, element el) {
-    int r = findTreeR(tree, el);
-    if (r) printf("%d번째에 탐색 성공.\n", r);
-    else printf("%d번째에 탐색 실패", heightTree(tree) + 1);
+    int r = findTreeR(tree, el, 1);
+    if (r > 0) printf("%d번째에 탐색 성공.\n", r);
+    else printf("%d번째에 탐색 실패\n", -r);
 }
 
 int main() {
