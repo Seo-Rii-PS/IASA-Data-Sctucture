@@ -3,4 +3,4 @@ project(iasa)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(iasa AVL.cpp)
+add_executable(iasa heap.cpp)
