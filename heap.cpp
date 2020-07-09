@@ -1,4 +1,5 @@
-#include<stdio.h>
+#include <stdio.h>
+#include <assert.h>
 
 typedef int element;
 const int SIZE = 10005;
@@ -20,6 +21,7 @@ struct heap {
     }
 
     element remove() {
+        assert(n > 0);
         int t = arr[1];
         arr[1] = arr[n];
         arr[n] = t;
@@ -28,7 +30,7 @@ struct heap {
         while (p <= n) {
             if (p * 2 + 1 > n) {
                 if (p * 2 > n) return arr[n + 1];
-                if (arr[p] > arr[p * 2]) {
+                if (arr[p] < arr[p * 2]) {
                     t = arr[p];
                     arr[p] = arr[p * 2];
                     arr[p * 2] = t;
@@ -77,4 +79,5 @@ int main() {
         printf("%d ", t.remove());
     }
     printf("\n");
+    printf("%d ", t.remove());
 }
